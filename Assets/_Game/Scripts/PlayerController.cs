@@ -20,13 +20,13 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         
-        if (Input.GetMouseButton(1))
-        {
-            AimBroom();
-        }
         if (Input.GetMouseButtonDown(1))
         {
             lastMousePos = Input.mousePosition;
+        }
+        if (Input.GetMouseButton(1))
+        {
+            AimBroom();
         }
     }
 
@@ -50,11 +50,12 @@ public class PlayerController : MonoBehaviour
 
         Debug.LogError(Math.Clamp(magnitude, 0, 10));
 
-        if (magnitude > 10)
+        if (magnitude > 1)
         {
             //playerObject.transform.position += direction.normalized * 2;
-            playerObject.transform.position += Vector3.Lerp(lastMousePos, direction, magnitude);
-            Debug.LogError(Math.Clamp(magnitude, 0, 10));
+            //playerObject.transform.position += Vector3.Lerp(lastMousePos, direction, magnitude);
+            //playerObject.transform.position += direction.normalized * 2;
+            playerObject.transform.position = Vector3.Lerp(playerObject.transform.position, playerObject.transform.position + direction.normalized * 2, magnitude);
         }
     }
 
